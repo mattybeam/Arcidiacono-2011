@@ -24,3 +24,14 @@ epsilon <- data.frame(rgev(n = N, xi = 0, mu = 0, beta = 1))
 colnames(epsilon) <- "eps"
 
 #test<- ddply(epsilon, "eps", .fun = "lambda")
+
+# Initialize CCPs
+p <- matrix(rep(0.5,(x_m + 1) * 4),ncol = 4) %>%
+  as.data.frame
+
+# Or, if you want something more random
+# p <- data.frame(p0s1 = runif(53),p0s2 = runif(53)) %>% mutate(p1s1 = 1-p0s1,p1s2 = 1-p0s2))
+
+# Apply the F operator to get the difference in value between keeping the engine and replacing it
+vals <- Foperator(P=p)
+
