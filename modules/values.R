@@ -9,12 +9,12 @@
 #             column 4 is for replacing the engine from x=0 to x_m, engine type s_2
 
 values <- function(s=c(s_1,s_2),x = 0:x_m){
-  u <- mdply(x,
-              function(t){
-                theta_1 * s - theta_2 * t
-              }) %>%
-    mutate(V3 = rep(0,length(x)),V4 = rep(0,length(x))) %>%
-    select(-X1)
+  mdply(x,
+        function(t){
+            theta_1 * s - theta_2 * t
+          }) %>%
+  mutate(V3 = rep(0,length(x)),V4 = rep(0,length(x))) %>%
+  select(-X1)
 }
 
 
