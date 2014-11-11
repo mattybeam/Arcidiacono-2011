@@ -27,16 +27,18 @@ u <- values()
 # Initialize CCPs
 p <- 
   matrix(rep(0.5,(x_m + 1) * 4),ncol = 4) %>%
-  as.data.frame
+  rbind(c(0,0,1,1)) %>%
+    as.data.frame
+
 phat <- 
-  matrix(rep(0,(x_m + 1) * 4),ncol = 4) %>%
+  matrix(rep(0,(x_m + 2) * 4),ncol = 4) %>%
   as.data.frame
 
 # Or, if you want something more random
-# p <- data.frame(p0s1 = runif(53),p0s2 = runif(53)) %>% mutate(p1s1 = 1-p0s1,p1s2 = 1-p0s2))
+# p <- data.frame(p0s1 = runif(53),p0s2 = runif(53)) %>% mutate(p1s1 = 1-p0s1,p1s2 = 1-p0s2)
 
 # Need a better while loop test. Only using first element right now.
-while(abs(max(phat - p)) > 10^(-16)){
+while(max(abs(phat - p)) > 10^(-16)){
   phat <- p
 
   # Apply the F operator to get the difference in value between keeping the engine and replacing it
