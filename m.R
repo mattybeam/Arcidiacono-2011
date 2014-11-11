@@ -36,7 +36,7 @@ phat <-
 # p <- data.frame(p0s1 = runif(53),p0s2 = runif(53)) %>% mutate(p1s1 = 1-p0s1,p1s2 = 1-p0s2))
 
 # Need a better while loop test. Only using first element right now.
-while(phat != p){
+while(abs(max(phat - p)) > 10^(-16)){
   phat <- p
 
   # Apply the F operator to get the difference in value between keeping the engine and replacing it
@@ -45,3 +45,18 @@ while(phat != p){
   # Apply the lambda operator to get the updated CCPs
   p <- lambda(v_bar = vals)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
