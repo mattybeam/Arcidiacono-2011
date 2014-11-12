@@ -1,3 +1,4 @@
+# lambda: values -> CCPs
 # INPUT: the difference in choice specific values between keeping the engine and replacing
 #         the engine of brand s at mileage x, x = 0,1,...,x_m
 #         Note: This is an (x_m + 1) by 2 matrix, where
@@ -14,5 +15,5 @@ lambda<- function (v_bar){
   data.frame(
     exp(v_bar) / (1 + exp(v_bar)),
     1 / (1 + exp(v_bar))
-  ) %>% rbind(c(0,0,1,1))
+  ) %>% rbind(c(0, 0, 1, 1))
 }

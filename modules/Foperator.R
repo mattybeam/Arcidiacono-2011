@@ -15,7 +15,7 @@
 
 Foperator <- function(P){
   data.frame(
-    f_s1 = u[,1] - u[,3] + beta * log(P[1,3]) - beta * log(P[2:nrow(P),3]),
-    f_s2 = u[,2] - u[,4] + beta * log(P[1,4]) - beta * log(P[2:nrow(P),4])
+    f_s1 = u[, 1] - u[, 3] + beta * log(P[1, 3]) - beta * log(P[2:nrow(P), 3]),
+    f_s2 = u[, 2] - u[, 4] + beta * log(P[1, 4]) - beta * log(P[2:nrow(P), 4])
   )
 }

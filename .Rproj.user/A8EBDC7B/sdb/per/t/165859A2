@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1415679185738.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "165859A2",
+    "lastKnownWriteTime" : 7741240722073845761,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "engines",
+        "contentUrl" : "content?title=engines&file=3cc4abc18d81420e99c82f3e5a29d8bd.htm",
+        "displayedObservations" : 100,
+        "displayedVariables" : 3,
+        "totalObservations" : 100,
+        "variables" : 3
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
