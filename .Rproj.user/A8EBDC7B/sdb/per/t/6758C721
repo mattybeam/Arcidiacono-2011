@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1415679187390.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "6758C721",
+    "lastKnownWriteTime" : 7741240722073845761,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "engines2",
+        "contentUrl" : "content?title=engines2&file=d7ac6b38e81e4500b3eb91d02137ed50.htm",
+        "displayedObservations" : 52,
+        "displayedVariables" : 100,
+        "totalObservations" : 52,
+        "variables" : 100
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
