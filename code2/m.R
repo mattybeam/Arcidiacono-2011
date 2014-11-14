@@ -14,8 +14,8 @@ s_2 = 4
 pi_s = .25
 beta = .99
 
-x_m = max(data$replace_period) + 10
+x_m = max(data$replace_Period) + 10
 
 phat = matrix(rep(1, x_m*2), ncol = 2)
-theta_1 = 10
-theta_2 = 1
+theta_1hat = 10
+theta_2hat = 1
