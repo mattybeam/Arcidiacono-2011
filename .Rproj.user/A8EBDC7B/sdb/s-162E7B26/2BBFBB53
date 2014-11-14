@@ -1,0 +1,16 @@
+{
+    "contents" : "varSave<-'../variables/'\nex.mods<-'modules/'\nlibrary('fExtremes')\nlibrary('plyr')\nlibrary('reshape2')\nlibrary('dplyr')\nlibrary('doParallel')\nregisterDoParallel(cores=20)\nl_ply(dir(ex.mods), function(l) source(paste(ex.mods, l, sep=\"\")))",
+    "created" : 1415998548400.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3126482192",
+    "id" : "2BBFBB53",
+    "lastKnownWriteTime" : 1415981390,
+    "path" : "~/Projects/OPNS 523/Arcidiacono-2011/code2/header.R",
+    "project_path" : "code2/header.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

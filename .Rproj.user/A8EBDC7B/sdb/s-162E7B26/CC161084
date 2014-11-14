@@ -1,0 +1,17 @@
+{
+    "contents" : "#################################################################################################\n# Arcidiacono and Miller (2011) coding assignment Part 2\n# Matt Beamer & Cheng-Yu Chan\n# 11/08/2014\n#################################################################################################\n\nsource('header.R')\ndata<- readRDS(paste0(varSave,\"engines_data.rds\"))\n#################################################################################################\n# Global parameters. Will not be passing into functions.\n#################################################################################################\ns_1 = 1\ns_2 = 4\npi_s = .25\nbeta = .99\n\nx_m = max(data$replace_period) + 10\n\nphat = matrix(rep(1, x_m*2), ncol = 2)\ntheta_1 = 10\ntheta_2 = 1",
+    "created" : 1415998231660.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "82509682",
+    "id" : "CC161084",
+    "lastKnownWriteTime" : 1415998764,
+    "path" : "~/Projects/OPNS 523/Arcidiacono-2011/code2/m.R",
+    "project_path" : "code2/m.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
