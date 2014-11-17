@@ -12,7 +12,7 @@ gamma.Operator <- function(CCP, theta, beta){
   #Output: dataframe of CCPs after one value function iteration
   group_by(CCP, s) %>%
     mutate(
-      CCP.replace = first(prob.replace, order_by=x.t),
+      CCP.replace = first(prob.replace),
       CCP.dont.replace = lead(prob.replace, default=last(prob.replace), order_by=x.t),
       f = theta[1]*s-theta[2]*x.t+beta*(log(CCP.replace)-log(CCP.dont.replace)),
       #for precision, calculate and store CCP and 1-CCP seperatly 

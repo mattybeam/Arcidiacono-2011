@@ -15,7 +15,7 @@ N = 10^6
 
 x_m <- max(data$replace_Period) + 10
 
-CCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace=.5) 
+CCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace=.5, prob.dont.replace=.5) 
 theta <- c(10,1)
 pi_s = .25
 
