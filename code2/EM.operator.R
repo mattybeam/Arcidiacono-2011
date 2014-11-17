@@ -1,18 +1,17 @@
 # EM.operator 
 #
 # INPUT: list containing
-#        (1) a dataframe of CCPs
+#        (1) a dataframe of CCPs, with prob.replace and prob.dont.replace
 #        (2) a pi_s value
 #        (3) a list of theta values
 # OUTPUT: Estimates in the next iteration, a list containing
-#        (1) a dataframe of CCPs
+#        (1) a dataframe of CCPs, with prob.replace and prob.dont.replace
 #        (2) a pi_s value
 #        (3) a list of theta values
 
 EM.operator <- function(CCP, pi_s, theta){
   # (2.17): compute next iteration of q.s
-  q.s <- gamma.Operator(CCP = CCP, theta = theta, beta = beta) %>%
-    CCP.to.likelihood %>%
+  q.s <- CCP.to.likelihood(CCP) %>%
     mutate(pi_s = ifelse(s == s.val[1], pi_s, 1 - pi_s)) %>%
     group_by(s) %>%
     mutate(likelihood = likelihood * pi_s) %>%
