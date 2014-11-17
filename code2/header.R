@@ -1,5 +1,5 @@
-varSave<-'../variables/'
-ex.mods<-'modules/'
+varSave<-'variables/'
+ex.mods<-'code2/modules/'
 library('fExtremes')
 library('plyr')
 library('reshape2')
