@@ -3,12 +3,12 @@
 # First parameter t are the parameters to solve for (using optim)
 MLE<- function(t, c, P){
   gamma.Operator(CCP = P, theta = t, beta = beta) %>%
-    CCP.to.likelihood %>%
-    left_join(y = c, by = c("x.t" = "replace_Period")) %>%
-    mutate(Total_replaced = ifelse(is.na(Total_replaced), 0, Total_replaced)) %>%
-    left_join(y = q.s, by = c("x.t" = "x.t")) %>%
-    mutate(q.s = ifelse(s == s.val[1], q_1, q_2)) %>%
-    mutate(logl = -1 * Total_replaced * log(likelihood^q.s)) %>%
+    CCP.to.likelihood %>% 
+    merge(y = c, by.x = "x.t", by.y = "replace_Period", all.x = TRUE) %>% 
+    mutate(Total_replaced = ifelse(is.na(Total_replaced), 0, Total_replaced)) %>% 
+    merge(y = q.s, by = "x.t") %>% 
+    mutate(q.s = ifelse(s == s.val[1], q_1, q_2)) %>% 
+    mutate(logl = 1 * Total_replaced * log(likelihood^q.s)) %>% 
     select(logl) %>%
     sum
 }
@@ -45,7 +45,10 @@ EM.operator <- function(CCP, pi_s, theta){
   
   # (2.20): solving for optimal thetas
   results <- optim(theta, MLE, 
-                 c = data, P = CCP, 
-                 method = 'L-BFGS-B', lower = c(0,0))
-  theta<- results$par
+                 c = data, P = CCPhat, 
+                 method = 'L-BFGS-B', lower = c(0,0),
+                 control=list(fnscale = -1)) # control$fnscale = -1 turns it into a maximization problem
+  theta <- results$par
+  list(CCP = CCP,pi_s = pi_s,theta = theta)
 }
+

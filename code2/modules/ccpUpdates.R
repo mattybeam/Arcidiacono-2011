@@ -31,3 +31,4 @@ CCP.to.likelihood <- function(CCP){
     select(-c(prob.replace, prob.dont.replace)) %>%
     ungroup
 }
+
