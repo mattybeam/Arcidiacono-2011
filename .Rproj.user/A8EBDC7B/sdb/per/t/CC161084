@@ -1,12 +1,12 @@
 {
-    "contents" : "#################################################################################################\n# Arcidiacono and Miller (2011) coding assignment Part 2\n# Matt Beamer & Cheng-Yu Chan\n# 11/08/2014\n#################################################################################################\n\nsource('header.R')\ndata<- readRDS(paste0(varSave,\"engines_data.rds\"))\n#################################################################################################\n# Global parameters. Will not be passing into functions.\n#################################################################################################\ns_1 = 1\ns_2 = 4\npi_s = .25\nbeta = .99\n\nx_m = max(data$replace_period) + 10\n\nphat = matrix(rep(1, x_m*2), ncol = 2)\ntheta_1 = 10\ntheta_2 = 1",
+    "contents" : "#################################################################################################\n# Arcidiacono and Miller (2011) coding assignment Part 2\n# Matt Beamer & Cheng-Yu Chan\n# 11/08/2014\n#################################################################################################\n\nsource('header.R')\ndata<- readRDS(paste0(varSave,\"engines_data.rds\"))\n#################################################################################################\n# Global parameters. Will not be passing into functions.\n#################################################################################################\ns.val <- c(1,4)\nbeta = .99\nN = 10^6\n\nx_m <- max(data$replace_Period) + 10\n\n# Initial CCP \nCCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace = 0.5, prob.dont.replace = 0.5) \ntrueCCP<- cbind(c(0:53),readRDS(paste0(varSave,\"trueCCP.rds\")))\nCCP <- left_join(CCP, trueCCP, by = c(\"x.t\" = \"c(0:53)\")) %>%\n  mutate(prob.replace = ifelse(s == s.val[1], f_s1.1, f_s2.1)) %>%\n  mutate(prob.dont.replace = ifelse(s == s.val[1], f_s1, f_s2)) %>%\n  select(1:4)\n\ntheta <- c(10,1)\npi_s = .27\n",
     "created" : 1415998231660.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "82509682",
+    "hash" : "1986088783",
     "id" : "CC161084",
-    "lastKnownWriteTime" : 1415998764,
+    "lastKnownWriteTime" : 1416271103,
     "path" : "~/Projects/OPNS 523/Arcidiacono-2011/code2/m.R",
     "project_path" : "code2/m.R",
     "properties" : {
