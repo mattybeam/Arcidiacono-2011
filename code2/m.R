@@ -23,5 +23,5 @@ CCP <- left_join(CCP, trueCCP, by = c("x.t" = "c(0:53)")) %>%
   mutate(prob.dont.replace = ifelse(s == s.val[1], f_s1, f_s2)) %>%
   select(1:4)
 
-theta <- c(10,1)
+theta <- c(11,2)
 pi_s = .27

@@ -3,11 +3,12 @@
 # First parameter t are the parameters to solve for (using optim)
 MLE<- function(t, c, P){
   gamma.Operator(CCP = P, theta = t, beta = beta) %>%
+    CCP.to.likelihood %>%
     left_join(y = c, by = c("x.t" = "replace_Period")) %>%
     mutate(Total_replaced = ifelse(is.na(Total_replaced), 0, Total_replaced)) %>%
     left_join(y = q.s, by = c("x.t" = "x.t")) %>%
     mutate(q.s = ifelse(s == s.val[1], q_1, q_2)) %>%
-    mutate(logl = -1 * Total_replaced * log(prob.replace^q.s)) %>%
+    mutate(logl = -1 * Total_replaced * log(likelihood^q.s)) %>%
     select(logl) %>%
     sum
 }
