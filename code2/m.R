@@ -4,7 +4,7 @@
 # 11/08/2014
 #################################################################################################
 
-source('code2/header.R')
+source('header.R')
 data<- readRDS(paste0(varSave,"engines_data.rds"))
 #################################################################################################
 # Global parameters. Will not be passing into functions.
@@ -15,14 +15,13 @@ N = 10^6
 
 x_m <- max(data$replace_Period) + 10
 
-<<<<<<< HEAD
-CCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace=.5, prob.dont.replace=.5) 
-=======
 # Initial CCP 
 CCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace = 0.5, prob.dont.replace = 0.5) 
->>>>>>> origin/master
+trueCCP<- cbind(c(0:53),readRDS(paste0(varSave,"trueCCP.rds")))
+CCP <- left_join(CCP, trueCCP, by = c("x.t" = "c(0:53)")) %>%
+  mutate(prob.replace = ifelse(s == s.val[1], f_s1.1, f_s2.1)) %>%
+  mutate(prob.dont.replace = ifelse(s == s.val[1], f_s1, f_s2)) %>%
+  select(1:4)
+
 theta <- c(10,1)
-pi_s = .25
-
-
-# l<- like(P = phat, t1 = theta_1hat, t2 = theta_2hat)
+pi_s = .27
