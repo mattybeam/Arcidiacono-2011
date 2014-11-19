@@ -28,7 +28,7 @@ MLE <- function(t, c, P, q){
 EM.operator <- function(CCP, pi_s, theta){
   # (2.17): compute next iteration of q.s
   q.s <- CCP.to.likelihood(CCP) %>%
-    mutate(pi_s = ifelse(s == s.val[1], pi_s, 1 - pi_s)) %>%
+    mutate(pi_s = ifelse(s == s.val[1], pi_s[1], pi_s[2])) %>%
     group_by(s) %>%
     mutate(likelihood = likelihood * pi_s) %>%
     ungroup %>%
@@ -38,7 +38,8 @@ EM.operator <- function(CCP, pi_s, theta){
 
   
   # (2.18): compute next iteration of pi_s
-  pi_s <- last(cumsum(q.s$q_1 * c(data$Total_replaced,rep(0,10))),order_by = q.s$x.t) / N
+  pi_s <- c(last(cumsum(q.s$q_1 * c(data$Total_replaced,rep(0,10))),order_by = q.s$x.t) / N,
+            last(cumsum(q.s$q_2 * c(data$Total_replaced,rep(0,10))),order_by = q.s$x.t) / N)
   
   # (2.22): update CCPs
   CCP <- gamma.Operator(CCP = CCP, theta = theta, beta = beta) 
@@ -46,10 +47,10 @@ EM.operator <- function(CCP, pi_s, theta){
   # (2.20): solving for optimal thetas
   results <- optim(theta, MLE, 
                  c = data, P = CCP, q = q.s, 
-                 method = 'L-BFGS-B', lower = c(0,0), control = list(fnscale = -1)) # control$fnscale = -1 turns it into a maximization problem
-  theta <- results$par
-  
-  est <- list(CCP = CCP, pi_s = pi_s, theta = theta, MLEval = results$value)
+                 method = 'L-BFGS-B', lower = c(0,0), 
+                 control = list(fnscale = -1) # control$fnscale = -1 turns it into a maximization problem
+                 ) 
+  list(CCP = CCP, pi_s = pi_s, theta = results$par, MLEval = results$value)
 }
 
 
