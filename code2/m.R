@@ -18,7 +18,7 @@ x_m <- max(data$replace_Period) + 10
 # Initial CCP 
 CCP <- expand.grid(s=s.val, x.t=seq(0, x_m), prob.replace = 0.5, prob.dont.replace = 0.5) 
 trueCCP<- cbind(c(0:53),readRDS(paste0(varSave,"trueCCP.rds")))
-CCP <- merge(CCP, trueCCP, by.x = "x.t", by.y = "c(0:53)") %>%
+trueCCP <- merge(CCP, trueCCP, by.x = "x.t", by.y = "c(0:53)") %>%
   mutate(prob.replace = ifelse(s == s.val[1], f_s1.1, f_s2.1)) %>%
   mutate(prob.dont.replace = ifelse(s == s.val[1], f_s1, f_s2)) %>% 
   select(x.t,s,prob.replace,prob.dont.replace)
