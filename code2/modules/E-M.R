@@ -1,7 +1,12 @@
 # Maximum likelihood function to solve over.
 # First parameter t are the parameters to solve for (using optim)
+# INPUT: list containing
+#        (1) a list of theta values
+#        (2) a dataframe of CCPs, with prob.replace and prob.dont.replace
+#        (3) a dataframe of counts of replacement time from empirical/simulated data
+#        (4) a dataframe of brand probabilities conditional on mileage
+# OUTPUT: A MLE value
 MLE <- function(t, c, P, q){
-  print(t)
   gamma.Operator(CCP = P, theta = t, beta = beta) %>%
     CCP.to.likelihood %>% 
     merge(y = c, by.x = "x.t", by.y = "replace_Period", all.x = TRUE) %>% 
@@ -24,6 +29,7 @@ MLE <- function(t, c, P, q){
 #        (1) a dataframe of CCPs, with prob.replace and prob.dont.replace
 #        (2) a pi_s value
 #        (3) a list of theta values
+#        (4) a MLE value
 
 EM.operator <- function(CCP, pi_s, theta){
   # (2.17): compute next iteration of q.s
@@ -48,18 +54,7 @@ EM.operator <- function(CCP, pi_s, theta){
   results <- optim(theta, MLE, 
                  c = data, P = CCP, q = q.s, 
                  method = 'L-BFGS-B', lower = c(0,0), 
-                 control = list(fnscale = -1) # control$fnscale = -1 turns it into a maximization problem
+                 control = list(fnscale = -1) # maximization option
                  ) 
   list(CCP = CCP, pi_s = pi_s, theta = results$par, MLEval = results$value)
 }
-
-
-
-
-
-
-
-
-
-
-

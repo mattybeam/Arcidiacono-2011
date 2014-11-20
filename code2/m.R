@@ -6,14 +6,14 @@
 
 source('header.R')
 data<- readRDS(paste0(varSave,"engines_data.rds"))
-#################################################################################################
+
 # Global parameters. Will not be passing into functions.
-#################################################################################################
 s.val <- c(1,4)
 beta = .99
 N = 10^6
 x_m <- max(data$replace_Period) + 10
 
+# Estimate primitives 20 times, and choose the result with the highest MLE val
 test<- rlply(20, estimatePrimitives(s.val,beta,est.error = 10^-3))
 global.ind<- which.max(laply(test, function(m) m$MLEval))
 final<- test[[global.ind]]
@@ -33,11 +33,9 @@ max(abs(final$pi_s - c(.25,.75)))
 # For theta
 max(abs(final$theta - c(10,1)))
 
-
-
-
-
-
-
-
-
+# Eyeball all results to see if there is actually one global max far from the rest
+comparison<- 
+  matrix(unlist(test), ncol = 189, byrow = TRUE)[,185:189] %>% 
+  data.frame %>% 
+  arrange(desc(X5))
+colnames(comparison)<- c("pi_1", "pi_2", "theta1", "theta2", "MLEval")
